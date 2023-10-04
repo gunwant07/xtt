@@ -9,13 +9,16 @@ const path = require('path');
 require('dotenv').config();
 
 main().catch((err) => console.log(err));
-
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  console.log('connected');
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('connected');
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 const userSchema = new mongoose.Schema({
